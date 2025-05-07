@@ -34,5 +34,5 @@ coverage/
 *.tmp
 *.swp
 
-# Lockfiles de outros gerenciadores (use só um!)
+# Lockfiles de outros gerenciadores
 package-lock.json
