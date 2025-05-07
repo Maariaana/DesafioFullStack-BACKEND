@@ -7,19 +7,25 @@ require('dotenv').config();
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const exists = await User.findOne({ where: { email } });
-    if (exists) return res.status(400).json({ message: 'Email já registrado' });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hashedPassword });
-    res.status(201).json({ message: 'Usuário registrado' });
-  } catch (err) {
-    res.status(500).json({ error: 'Erro no registro' });
-  }
-});
+    const { email, password } = req.body;
+  
+    try {
+      const exists = await User.findOne({ where: { email } });
+      if (exists) return res.status(400).json({ message: 'Email já registrado' });
+  
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = await User.create({
+        email,
+        password: hashedPassword
+      });
+  
+      res.status(201).json({ message: 'Usuário registrado com sucesso', user });
+    } catch (err) {
+      console.error('Erro no registro:', err);
+      res.status(500).json({ error: 'Erro no registro' });
+    }
+  });
+  
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
