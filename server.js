@@ -19,6 +19,6 @@ app.use(express.json());
 app.use(authRoutes);
 app.use(dashboardRoutes);
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync().then(() => {
   app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));
 });
