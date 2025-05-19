@@ -1,3 +1,11 @@
+require('dotenv').config();
+
+// Verifica se a variável JWT_SECRET está definida
+if (!process.env.JWT_SECRET) {
+  console.error('❌ ERRO: JWT_SECRET não está definido no .env');
+  process.exit(1); // Encerra o servidor
+}
+
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/database');
